@@ -31,7 +31,7 @@ html { scroll-behavior: smooth; overflow-x: hidden; }
 body { overflow-x: hidden; }
 
 body {
-  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
@@ -39,7 +39,7 @@ body {
 }
 
 h1, h2, .navbar-logo, .footer-logo {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: Georgia, 'Times New Roman', serif;
 }
 
 a { color: var(--gold); text-decoration: none; transition: var(--transition); }
@@ -85,7 +85,7 @@ a:hover { color: var(--gold-light); }
 }
 
 .navbar-logo-text {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--text-primary);
@@ -372,7 +372,7 @@ a:hover { color: var(--gold-light); }
   letter-spacing: 0.08em;
   margin-bottom: 0.6rem;
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 .hizmet-satir p {
@@ -726,6 +726,26 @@ a:hover { color: var(--gold-light); }
 
 .basari-ekran h2 { font-size: 1.8rem; margin-bottom: 1rem; }
 .basari-ekran p  { color: var(--text-secondary); margin-bottom: 2rem; }
+
+.basari-butonlar {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .basari-butonlar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.2rem;
+  }
+  .basari-butonlar .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 /* Form buton satırı */
 .form-actions {

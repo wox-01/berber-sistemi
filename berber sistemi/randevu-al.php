@@ -128,7 +128,7 @@ $hizmetler = aktif_hizmetleri_getir();
           <div class="form-grid" style="margin-top:1.2rem;">
             <div class="form-group">
               <label>Telefon *</label>
-              <input type="tel" id="musteriTel" class="form-control" placeholder="05XX XXX XX XX" required autocomplete="tel">
+              <input type="tel" id="musteriTel" class="form-control" placeholder="0 (5XX) XXX XX XX" maxlength="17" required autocomplete="tel" inputmode="numeric">
             </div>
             <div class="form-group">
               <label>Not (opsiyonel)</label>
@@ -174,9 +174,10 @@ $hizmetler = aktif_hizmetleri_getir();
               <div class="ozet-satir"><span class="etiket">Tarih</span><span class="deger" id="basariTarih"></span></div>
               <div class="ozet-satir"><span class="etiket">Saat</span><span class="deger gold" id="basariSaat"></span></div>
             </div>
-            <a href="<?= BASE_URL ?>/" class="btn btn-outline">Ana Sayfaya Dön</a>
-            &nbsp;
-            <a href="<?= BASE_URL ?>/randevu-al.php" class="btn btn-primary">Yeni Randevu</a>
+            <div class="basari-butonlar">
+              <a href="<?= BASE_URL ?>/" class="btn btn-outline">Ana Sayfaya Dön</a>
+              <a href="<?= BASE_URL ?>/randevu-al.php" class="btn btn-primary">Yeni Randevu</a>
+            </div>
           </div>
         </div>
       </div>
@@ -189,6 +190,47 @@ $hizmetler = aktif_hizmetleri_getir();
 
 <script src="<?= BASE_URL ?>/assets/js/main.js"></script>
 <script>
+// Telefon mask: 0 (5XX) XXX XX XX
+(function() {
+  const tel = document.getElementById('musteriTel');
+  if (!tel) return;
+
+  function fmt(raw) {
+    let d = raw.replace(/\D/g, '').slice(0, 11);
+    if (d.length > 0 && d[0] !== '0') d = '0' + d.slice(0, 10);
+    let out = '';
+    for (let i = 0; i < d.length; i++) {
+      if (i === 1) out += ' (';
+      else if (i === 4) out += ') ';
+      else if (i === 7 || i === 9) out += ' ';
+      out += d[i];
+    }
+    return out;
+  }
+
+  tel.addEventListener('input', function() {
+    const start = this.selectionStart;
+    const oldLen = this.value.length;
+    this.value = fmt(this.value);
+    const diff = this.value.length - oldLen;
+    const newPos = Math.max(0, start + diff);
+    this.setSelectionRange(newPos, newPos);
+  });
+
+  tel.addEventListener('keydown', function(e) {
+    if (e.key !== 'Backspace' || this.selectionStart !== this.selectionEnd) return;
+    const maskAt = [2, 3, 7, 8, 12, 15]; // positions of mask chars: ' (', ') ', ' ', ' '
+    const pos = this.selectionStart;
+    if (maskAt.includes(pos - 1)) {
+      e.preventDefault();
+      const raw = this.value.replace(/\D/g, '').slice(0, -1);
+      this.value = fmt(raw);
+      const newPos = pos - 2;
+      this.setSelectionRange(newPos, newPos);
+    }
+  });
+})();
+
 document.getElementById('btnAdim2')?.addEventListener('click', function() {
   setTimeout(() => {
     const items  = document.querySelectorAll('.hizmet-secim-item.selected');

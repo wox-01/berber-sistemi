@@ -211,10 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ad      = document.getElementById('musteriAd')?.value.trim();
     const soyad   = document.getElementById('musteriSoyad')?.value.trim();
-    const telefon = document.getElementById('musteriTel')?.value.trim();
+    const telefon = document.getElementById('musteriTel')?.value.replace(/\D/g, '').trim();
     const notlar  = document.getElementById('musteriNotlar')?.value.trim();
 
     if (!ad || !soyad || !telefon) { toast('Ad, soyad ve telefon zorunlu', 'error'); return; }
+    if (telefon.length !== 11 || !telefon.startsWith('05')) { toast('Geçerli bir telefon girin (05XX XXX XX XX)', 'error'); return; }
 
     const btnGonder = document.getElementById('btnGonder');
     btnGonder.disabled = true;

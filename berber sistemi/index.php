@@ -29,9 +29,6 @@ $acik = $calisma_bugun
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Adonis Berber - Modern Erkek Bakımı</title>
   <meta name="description" content="Online randevu alın, kaliteli berber hizmetinin keyfini çıkarın.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
 </head>
 <body>
@@ -115,9 +112,6 @@ $acik = $calisma_bugun
         <h3>Onay Alın</h3>
         <p>Randevunuz anında onaylanır</p>
       </div>
-    </div>
-    <div style="text-align:center; margin-top:2.5rem;">
-      <a href="<?= BASE_URL ?>/randevu-al.php" class="btn btn-primary">Başla →</a>
     </div>
   </div>
 </section>
